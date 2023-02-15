@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.Spinner
 import android.widget.TextView
@@ -21,6 +22,18 @@ class MainActivity : AppCompatActivity() {
         val colors = resources.getStringArray(R.array.color_array)
 
         spinner.adapter = ColorAdapter(this, colors)
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                canvas.setBackgroundColor((Color.parseColor(colors[p2])))
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                canvas.setBackgroundColor(Color.WHITE)
+            }
+
+        }
+
     }
 }
 
@@ -67,10 +80,8 @@ class ColorAdapter(_context: Context, _colors : Array<String>) : BaseAdapter(){
         }
         textView.text = colors[p0]
 
-        TODO()
-        // Make some sort of a listener to pass the color read in the array to outside of the
-        // spinner, so the background color can be read
-
         return textView
     }
+
+
 }
