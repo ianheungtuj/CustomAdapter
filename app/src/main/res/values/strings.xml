@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">CustomAdapter</string>
+
+    <string-array name="color_array">
+        <item>Choose your color</item>
+        <item>Blue</item>
+        <item>White</item>
+        <item>Yellow</item>
+        <item>Red</item>
+        <item>Grey</item>
+        <item>Green</item>
+        <item>Cyan</item>
+    </string-array>
+</resources>
