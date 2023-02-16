@@ -21,18 +21,31 @@ class MainActivity : AppCompatActivity() {
 
         val colors = resources.getStringArray(R.array.color_array)
 
-        spinner.adapter = ColorAdapter(this, colors)
-
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                canvas.setBackgroundColor((Color.parseColor(colors[p2])))
+                if (p2 == 0){
+                    canvas.setBackgroundColor(Color.WHITE)
+                    spinner.setBackgroundColor(Color.WHITE)
+                    println("Select Color")
+                    println()
+                }
+                else{
+                    // Set background color of layout to selected color
+                    canvas.setBackgroundColor(Color.parseColor(colors[p2]))
+                    spinner.setBackgroundColor(Color.WHITE)
+                    println(colors[p2])
+                    println(p2)
+                    println()
+                }
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                canvas.setBackgroundColor(Color.WHITE)
             }
 
         }
+
+        spinner.adapter = ColorAdapter(this, colors)
 
     }
 }
@@ -45,7 +58,7 @@ class ColorAdapter(_context: Context, _colors : Array<String>) : BaseAdapter(){
     private val colors = _colors
 
     override fun getCount(): Int {
-        return  colors.size
+        return colors.size
     }
 
     override fun getItem(p0: Int): Any {
@@ -60,27 +73,23 @@ class ColorAdapter(_context: Context, _colors : Array<String>) : BaseAdapter(){
 
         //val textView = TextView(context)
 
-        val textView : TextView
-
-        if (p1 != null){
-            // This is a previously created TextView
-            // cast it
-            textView = p1 as TextView
-        }
-        else{
-            textView = TextView(context)
-            textView.textSize = 22f // 22f means its a float value
-            textView.setPadding(5,10,0,10)
-            if (p0 == 0){
-                textView.setBackgroundColor(Color.WHITE)
-            }
-            else{
-                textView.setBackgroundColor(Color.parseColor(colors[p0]))
-            }
+        val textView = (p1 as? TextView) ?: TextView(context).apply {
+            textSize = 22f
+            setPadding(5, 10, 0, 10)
         }
         textView.text = colors[p0]
 
+        if (p0 != 0) {
+            // Set background color to match the text
+            textView.setBackgroundColor(Color.parseColor(colors[p0]))
+        }
+        else {
+            // Set background color to white
+            textView.setBackgroundColor(Color.WHITE)
+        }
+
         return textView
+
     }
 
 
