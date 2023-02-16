@@ -10,5 +10,8 @@
         <item>Grey</item>
         <item>Green</item>
         <item>Cyan</item>
+        <item>Magenta</item>
+        <item>Olive</item>
+        <item>Purple</item>
     </string-array>
 </resources>
